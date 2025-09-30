@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockGrid>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Models
+@{
+	Layout = "Layout.cshtml";
+	var test = Model;
+}
+
+@await Html.GetBlockGridHtmlAsync(Model.Content)

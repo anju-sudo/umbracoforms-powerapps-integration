@@ -1,0 +1,248 @@
+﻿@inherits UmbracoViewPage<Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Models
+@{
+    var homePage = Model;
+    var logoImage = Model?.LogoImage;
+    var searchQuery = Context.Request.Query["q"];
+    var searchPage = Umbraco.ContentAtRoot()
+        .DescendantsOrSelfOfType(Search.ModelTypeAlias)
+        .FirstOrDefault();
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    var cultures = Model?.Cultures;
+    var isEnglish = currentCulture.StartsWith("en");
+    var isMalay = currentCulture.StartsWith("ms") || currentCulture == "ms-bn";
+
+    var englishUrl = Model.Url("en-US");
+    var malayUrl = Model.Url("ms-bn");
+    var loginPageUrl = Umbraco.ContentAtRoot()
+        .DescendantsOrSelfOfType(Login.ModelTypeAlias)
+        .FirstOrDefault()?.Url();
+
+}
+<header class="navigation">
+    <div class="top-nav">
+        <div class="container">
+            <div class="navigation__block">
+                <div class="logo-block">
+                    <a href="@homePage?.Url()">
+                        <Img src="@logoImage?.Url()" alt="logo" width="108" height="34" />
+                    </a>
+
+                </div>
+                <div class="link-block">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#">@Umbraco.GetDictionaryValue("br-business", "Business")</a>
+
+                            </li>
+                            <li>
+                                <a href="#">@Umbraco.GetDictionaryValue("br-visitors", "Visitors")</a>
+
+                            </li>
+                            <li>
+                                <a href="#">@Umbraco.GetDictionaryValue("br-Government Directory", "Government")</a>
+
+                            </li>
+                            <li>
+                                <a href="#">@Umbraco.GetDictionaryValue("br-Darussalam", "e - Darussalam")</a>
+
+                            </li>
+                            <li>
+                                <a href="#">@Umbraco.GetDictionaryValue("br-Reach Us", "Reach Us")</a>
+
+                            </li>
+                        </ul>
+                        <div class="mobile-nav">
+                            <ul>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br-Services", "Services")</a>
+
+                                </li>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br-Home", "Home")</a>
+
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        @Umbraco.GetDictionaryValue("br sec-Reach Us", "Reach Us")
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br - Mobile Apps", "Mobile Apps")</a>
+
+                                </li>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br-Tenders and Quatations", "Tenders and Quatations")</a>
+
+                                </li>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br-Colander of Events", "Colander of Events")</a>
+
+                                </li>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br-Govt Directory", "Govt Directory")</a>
+
+                                </li>
+                                <li>
+                                    <a href="#">@Umbraco.GetDictionaryValue("br-Social Media Hub", "Social Media Hub")</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="button-block">
+                    <a href="@loginPageUrl" class="btn btn--curved btn--bg--blue btn--login">
+                        <span class="btn-logo">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                 fill="none">
+
+                                <path d="M16.3333 18V16.3333C16.3333 15.4493 15.9821 14.6014 15.357 13.9763C14.7319 13.3512 13.8841 13 13 13H6.33333C5.44928 13 4.60143 13.3512 3.97631 13.9763C3.35119 14.6014 3 15.4493 3 16.3333V18"
+                                      stroke="white" stroke-width="1.66667" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+
+                                <path d="M9.66683 9.66667C11.5078 9.66667 13.0002 8.17428 13.0002 6.33333C13.0002 4.49238 11.5078 3 9.66683 3C7.82588 3 6.3335 4.49238 6.3335 6.33333C6.3335 8.17428 7.82588 9.66667 9.66683 9.66667Z"
+                                      stroke="white" stroke-width="1.66667" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+
+                            </svg>
+
+                        </span>
+
+                        <span class="btn-text">Login</span>
+
+                    </a>
+                   
+                    <div class="lang-btn">
+                        <div class="lang-click">
+                            <span class="globe">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                     fill="none">
+
+                                    <path d="M10.3333 18.6667C14.9357 18.6667 18.6667 14.9357 18.6667 10.3333C18.6667 5.73096 14.9357 2 10.3333 2C5.73096 2 2 5.73096 2 10.3333C2 14.9357 5.73096 18.6667 10.3333 18.6667Z"
+                                          stroke="#07203B" stroke-width="1.66667" stroke-linecap="round"
+                                          stroke-linejoin="round" />
+
+                                    <path d="M2 10.3333H18.6667" stroke="#07203B" stroke-width="1.66667"
+                                          stroke-linecap="round" stroke-linejoin="round" />
+
+                                    <path d="M10.3333 2C12.4177 4.28196 13.6023 7.24336 13.6667 10.3333C13.6023 13.4233 12.4177 16.3847 10.3333 18.6667C8.24893 16.3847 7.06437 13.4233 7 10.3333C7.06437 7.24336 8.24893 4.28196 10.3333 2Z"
+                                          stroke="#07203B" stroke-width="1.66667" stroke-linecap="round"
+                                          stroke-linejoin="round" />
+
+                                </svg>
+
+                            </span>
+                            <span class="lang-text">
+                                @(isEnglish ? "English" : "Malay")
+                            </span>
+                        </div>
+                        <div class="lang-drop">
+                            <ul>
+                                <li class="@(isEnglish ? "active" : "")">
+                                    <a href="@englishUrl">
+                                        <span class="ln-name">English</span>
+                                        <span class="ln-icon">EN</span>
+                                    </a>
+                                </li>
+                                <li class="@(isMalay ? "active" : "")">
+                                    <a href="@malayUrl">
+                                        <span class="ln-name">Malay</span>
+                                        <span class="ln-icon">MA</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- hamberger animation -->
+        <div class="hamburger" id="hamburger-1">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+    </div>
+    <div class="main-nav">
+        <div class="container">
+            <div class="main-nav-wrapper">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br-Services", "Services")</a>
+
+                        </li>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br-Home", "Home")</a>
+
+                        </li>
+                        <li>
+                            <a href="#">
+                                @Umbraco.GetDictionaryValue("br sec-Reach Us", "Reach Us")
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br - Mobile Apps", "Mobile Apps")</a>
+
+                        </li>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br-Tenders and Quatations", "Tenders and Quatations")</a>
+
+                        </li>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br-Colander of Events", "Colander of Events")</a>
+
+                        </li>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br-Govt Directory", "Govt Directory")</a>
+
+                        </li>
+                        <li>
+                            <a href="#">@Umbraco.GetDictionaryValue("br-Social Media Hub", "Social Media Hub")</a>
+
+                        </li>
+                    </ul>
+                </nav>
+                <div class="social-icon">
+                    <ul>
+                        <li>
+                            <a href="#"><img src="~/images/facebook.svg" alt="facebook" width="20" height="20" /></a>
+                        </li>
+                        <li>
+                            <a href="#"><img src="~/images/twitter.svg" alt="twitter" width="20" height="20" /></a>
+
+                        </li>
+                        <li>
+                            <a href="#"><img src="~/images/instagram.svg" alt="instagram" width="20" height="20" /></a>
+                        </li>
+                        <li>
+                            <a href="#"><img src="~/images/youtube.svg" alt="youtube" width="20" height="20" /></a>
+
+                        </li>
+                        <li>
+                            <a href="#"><img src="~/images/send.svg" alt="youtube" width="20" height="20" /></a>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+        document.querySelectorAll('.lang-drop a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.stopPropagation(); // allow click but prevent dropdown toggle conflict
+            window.location.href = this.getAttribute('href');
+        });
+    });
+</script>

@@ -1,0 +1,63 @@
+﻿@using Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ApplicationService>
+@using ContentModels = Models;
+@{
+    Layout = "master.cshtml";
+    var form = Model.Siblings<Content>()?.FirstOrDefault();
+}
+<section class="application-service">
+    <div class="container">
+        <div class="application-service__wrapper">
+            <h1>Application for permission to publish Magazines and Newspapers</h1>
+            <hr />
+            <p>
+                This service is provided by the Ministry of Home Affairs (MOHA). Publications
+                of Magazines and Newspapers are governed by the local Newspapers Act (Term
+                105). Aimed at controlling the printing, publication, production and sale
+                of Newspapers in this country. All local Newspapers must be registered
+                to the Registrar of Newspapers i.e. Permanent Secretary of MOHA and all
+                local and foreign Newspapers must first obtain a permit from the Minister
+                of Home Affairs.
+            </p>
+            <p class="note">
+                <strong>This is an offline/counter service</strong>
+            </p>
+            <div class="actions">
+                <a href="@form?.Url()" class="btn start">Start</a>
+            </div>
+            <h3>General Prerequisite / Criteria</h3>
+            <p>
+                Each application for permits, whether to publish and print local newspapers
+                or to bring books/magazines from abroad must first make a permit payment.
+            </p>
+            <h3>How to use the Service</h3>
+            <p>
+                Form can be obtained at the Counter of Public Entertainment Control Division
+                (Bahagian Pengawalan Hiburan Awam dan Penerbitan) or download <a href="#">here</a>.
+            </p>
+            <ul>
+                <li>
+                    Information on applicants, redaction conferences, authors, managers and
+                    others shall be completed.
+                </li>
+                <li>
+                    Application Form must be completed and submitted to Counter of Public
+                    Entertainment Control Division (Bahagian Pengawalan Hiburan Awam dan Penerbitan)
+                    not less than three (3) months before the date of publication commences.
+                </li>
+                <li>
+                    Sample or a dummy Magazines/Newspapers to be published must be included
+                    in three (3) copies.
+                </li>
+                <li>
+                    Deposits of $100,000.00 must be paid in cash for local Newspaper publications
+                    and $20,000.00 for local magazines.
+                </li>
+            </ul>
+            <div class="actions back">
+                <button class="btn back">Back</button>
+            </div>
+        </div>
+    </div>
+</section>

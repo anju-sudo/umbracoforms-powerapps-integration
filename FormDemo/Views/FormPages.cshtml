@@ -1,0 +1,117 @@
+﻿@using Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FormPages>
+@using ContentModels = Models;
+@{
+    Layout = "master.cshtml";
+    var formTitle = Model?.FormTitle;
+    var description = Model?.Description;
+    var startButton = Model?.StartButton?.Url();
+    // Get the nearest parent of type FormLanding
+    var formLandingPage = Model?.Parent as FormLanding
+                          ?? Model?.Ancestors().OfType<FormLanding>().FirstOrDefault();
+    var home = Umbraco.ContentAtRoot()?.FirstOrDefault()?.Url();
+    var formLandingPages = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("formLanding").ToList();
+}
+
+<section class="inner-banner inner-banner-small">
+    <div class="inner-banner__img">
+        <img src="~/images/banner-bg.jpg" alt="banner background">
+    </div>
+    <div class="container">
+        <div class="inner-banner__wrapper">
+            <div class="pagination">
+                <ul>
+                    <li>
+                        <a href="@formLandingPage?.Url()">List of All Government Services</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">Application for permissio...</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="sidebar-layout article-detail">
+    <div class="container">
+        <div class="sidebar-layout__wrapper">
+            <div class="sidebar-layout__content">
+                <div class="rte-block">
+                    @if (!string.IsNullOrEmpty(formTitle))
+                    {
+                        <h2>@formTitle</h2>
+                    }
+
+                    @if (description != null)
+                    {
+                        @Html.Raw(description)
+                    }
+
+                </div>
+                <div class="start-back-btn">
+
+                    <p>This is an offline/counter service</p>
+
+                    <div class="btn-grp">
+                        @if (!string.IsNullOrEmpty(startButton))
+                        {
+                            <a href="@startButton" class="btn btn--bg--blue btn--start">Start</a>
+                        }
+                        <a href="@formLandingPage?.Url()" class="btn btn--bg--white btn--back">Back</a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="sidebar-layout__sidebar">
+
+                <div class="sidebar-widget">
+                    <ul>
+                        @foreach (var page in formLandingPages)
+                        {
+                            var itemTitle = page?.Value<string>("title");
+                            var pageUrl = page?.Url();
+                            <li>
+                                <a href="@pageUrl">
+                                    @itemTitle<span class="icon">
+
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                            <g clip-path="url(#clip0_197_427)" stroke="#234A75" stroke-opacity=".6" stroke-width="1.667"
+                                            stroke-linecap="round" stroke-linejoin="round">
+
+                                                <path d="M10 18.333a8.333 8.333 0 100-16.666 8.333 8.333 0 000 16.666z" />
+
+                                                <path d="M10 13.333L13.333 10 10 6.667M6.667 10h6.666" />
+
+                                            </g>
+
+                                            <defs>
+
+                                                <clipPath id="clip0_197_427">
+
+                                                    <path fill="#fff" d="M0 0h20v20H0z" />
+
+                                                </clipPath>
+
+                                            </defs>
+
+                                        </svg>
+                                    </span>
+                                </a>
+
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+

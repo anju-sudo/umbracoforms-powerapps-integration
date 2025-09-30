@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Microsoft.AspNetCore.Http
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = null;
+	var expiryDate = Context.Session.GetString("ExpiryDate");
+	var licenseNumber = Context.Session.GetString("LicenseNumber");
+}
+@if (!string.IsNullOrEmpty(expiryDate))
+{
+    <div class="alert alert-success">
+        <h4>License Check Result</h4>
+        <p>License Number: @licenseNumber</p>
+        <p>Expiry Date: @expiryDate</p>
+    </div>
+}

@@ -1,0 +1,1 @@
+function Nav(){let t=document.querySelector(".link-block"),c=document.body;document.querySelectorAll(".hamburger").forEach(function(e){e.addEventListener("click",function(){this.classList.toggle("is-active"),t&&t.classList.toggle("is-active"),c.classList.toggle("nav-open")})})}export{Nav};

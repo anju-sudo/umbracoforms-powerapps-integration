@@ -1,0 +1,19 @@
+﻿@using Models
+@using Umbraco.Cms.Core.Models.Blocks
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockGridItem<Form>>
+@{
+    var model = Model.Content;
+    var selectedForm = model?.ChooseAform;
+    var selectedTheme = model?.Theme;
+    var excludeScript = model?.Value<bool>("excludeScripts");
+
+
+    @if (selectedForm != null && Guid.TryParse(selectedForm.ToString(), out var formGuid))
+    {
+        @await Component.InvokeAsync("RenderForm", new { formId = formGuid, theme = !string.IsNullOrWhiteSpace(selectedTheme) ? selectedTheme : "default", excludeScript = excludeScript })
+    }
+    else
+    {
+        <p>No form selected or invalid form identifier.</p>
+    }
+}

@@ -1,0 +1,63 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    var homepage = Umbraco.ContentAtRoot().FirstOrDefault()?.Url(); 
+}
+<div class="login-wrapper">
+    <div class="container">
+        <div class="login--block">
+            <div class="half-col content-col">
+                <div class="content-wrapper">
+                    <div class="login-logo">
+                        <img src="images/go-gov-bn-on-dark.svg" alt="">
+                    </div>
+                    <div class="login-content">
+                        <div class="login-content__head">
+                            <h1 class="font-48">e-Darussalam Account</h1>
+                            <p>Single account, Multiple services</p>
+                        </div>
+                        <div class="login-content__details">
+                            <p>Use your e-Darussalam account to access government online services</p>
+                            <ul>
+                                <li>Apply for jobs</li>
+                                <li>Renew your driving license</li>
+                                <li>Pay your electricity bills</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="half-col login-col">
+                <div class="login-form">
+                    <div class="login-box-head">Login to</div>
+                    <div class="login-box-logo">
+                        <img src="~/images/go-gov-bn-on-light.svg" alt="" width="121" height="36">
+                    </div>
+                    <div class="login-box-content">
+                        <p>Please sign in with your government AD credentials to continue</p>
+                    </div>
+                    <div class="login-box">
+                        <form action="@homepage" method="get">
+                            <div class="single-col-form">
+                                <div class="login-box-input">
+                                    <label for="username">Government AD Username</label>
+                                    <input type="text" name="username" id="username">
+                                </div>
+                            </div>
+                            <div class="single-col-form">
+                                <div class="login-box-input">
+                                    <label for="username">Password</label>
+                                    <input type="password" name="password" id="password">
+                                </div>
+                            </div>
+                            <div class="single-col-form">
+                                <div class="login-box-button">
+                                    <button type="submit" class="btn btn--sign-in btn--bg--yellow w-full text-center">Sign in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

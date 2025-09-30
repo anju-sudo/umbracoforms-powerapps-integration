@@ -1,0 +1,39 @@
+@model Umbraco.Forms.Web.Models.FieldViewModel
+
+
+<input type="checkbox" name="@Model.Id" id="@Model.Id" value="true" data-umb="@Model.Id"
+@if (Model.Mandatory)
+{
+    <text> data-val="true" data-val-required="@Model.RequiredErrorMessage" data-rule-required="true" data-msg-required="@Model.RequiredErrorMessage" </text>
+}
+@if (Model.ContainsValue(true) || Model.ContainsValue("true") || Model.ContainsValue("on"))
+{
+    <text> checked="checked" </text>
+} />
+ <label for="@Model.Id" class="umbraco-forms-label">
+    @Model.Caption
+
+    @if (Model.ShowIndicator)
+    {
+        <span class="umbraco-forms-indicator">*</span>
+    }
+    @if (!string.IsNullOrEmpty(Model.ToolTip))
+    {
+        //<span class="umbraco-forms-tooltip help-block">@f.ToolTip</span>
+
+        <span class="tool-tip">
+            <div class="tri"><img src="~/images/tooltip.svg" class="img-fluid"></div>
+            <div class="tool-tip-content">
+                <div class="tool-tip-wrapper">
+                    <div class="content-block">
+                        <div class="tool-tip-close"></div>
+                        <div class="content"><p>@Model.ToolTip</p></div>
+                    </div>
+                </div>
+            </div>
+        </span>
+    }
+</label> 
+ 
+<input type="hidden" name="@Model.Name" value="false" />
+

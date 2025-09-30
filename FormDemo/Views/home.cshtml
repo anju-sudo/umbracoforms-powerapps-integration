@@ -1,0 +1,93 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using Models
+@{
+    Layout = "master.cshtml";
+    // Alternative approach using ContentType aliases
+    var categoriesNode = Model.Children
+        .Where(x => x.ContentType.Alias == "categories")
+        .FirstOrDefault();
+
+    // Get the children of Categories (all formLanding nodes)
+    var categoryNodes = categoriesNode?.Children()
+        .Where(x => x.ContentType.Alias == "formLanding")
+        ?? Enumerable.Empty<IPublishedContent>();
+
+}
+
+<main class="main-wrapper">
+    @await Html.PartialAsync("common/heroBanner", Model)
+    <section class="service">
+        <div class="container">
+            <div class="service__wrapper"></div>
+            <div class="section-heading">
+                <h2>@Model?.ServiceCategoryTitle</h2>
+            </div>
+            <div class="service__layout">
+                <div class="service-row">
+                    @if (categoryNodes.Any())
+                    {
+                        @foreach (var cat in categoryNodes)
+                        {
+                            var iconUpload = cat?.Value<IPublishedContent>("iconUpload")?.Url();
+                            var title = cat?.Value<string>("title");
+                            var description = cat?.Value<string>("shortDescription");
+                            <a href="@cat?.Url()" class="service-item">
+
+                                <div class="service-card">
+
+                                    <div class="link-arrow">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+
+                                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                            stroke="#3674B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+                                            <path d="M12 16L16 12L12 8" stroke="#3674B5" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                            <path d="M8 12H16" stroke="#3674B5" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                        </svg>
+
+                                    </div>
+                                    @if (iconUpload != null)
+                                    {
+                                        <div class="service-card__icon">
+
+                                            <img src="@iconUpload" width="52" height="48">
+
+                                        </div>
+                                    }
+
+                                    <div class="service-card__content">
+                                        @if(!string.IsNullOrEmpty(title))
+                                        {
+                                            <h3 class="title-3">@title</h3>
+                                        }
+                                        @if (!string.IsNullOrEmpty(description))
+                                        {
+                                        <p>@description</p>
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    
+</main>
+
+@await Html.PartialAsync("common/footer", Model)

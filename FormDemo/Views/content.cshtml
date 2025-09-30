@@ -1,0 +1,44 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Content>
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Models
+@{
+    Layout = "master.cshtml";
+    var gridItem = Model.SelectContent;
+}
+
+@* @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.SubTitle, Model.MainImage))
+ *@
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                @Html.GetBlockListHtml(Model.ContentRows)
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<div class="form-wrapper d-flex justify-content-center">
+    <div class="col-md-8">
+
+        @if (gridItem != null && gridItem.Any())
+        {
+            @await Html.GetBlockGridHtmlAsync(gridItem)
+        }
+      
+    </div>
+</div>
+
+@* <style>
+    .my-form-container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff; 
+        border-radius: 8px;
+    }
+</style> *@
+@* 
+<script src="~/scripts/licence_check.js"></script> *@

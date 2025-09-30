@@ -1,0 +1,8 @@
+﻿@using Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Login>
+@using ContentModels = Models;
+@{
+    Layout = "master.cshtml";
+}
+@await Html.PartialAsync("common/login", Model)

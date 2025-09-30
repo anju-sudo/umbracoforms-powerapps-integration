@@ -1,0 +1,21 @@
+﻿@using Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<PaymentSuccessPage>
+@using ContentModels = Models;
+@{
+    Layout = "master.cshtml";
+    var home = Umbraco.ContentAtRoot()?.FirstOrDefault()?.Url();
+}
+<section class="payment-success">
+    <div class="container">
+        <div class="payment-success__block">
+            <p>Thank you</p>
+            <img src="~/images/popover.gif" alt="gif">
+            <h2>Payment Successful</h2>
+            <a href="@home" class="btn btn--bg--blue btn--payment w-full text-center">Go to Home Page</a>
+            <a href="" class="simple-link">Generate Receipt</a>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("common/footer", Model)

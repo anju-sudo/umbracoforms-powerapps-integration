@@ -1,0 +1,38 @@
+﻿@using Models
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
+@{
+    var homePage = Model;
+    var searchQuery = Context.Request.Query["q"];
+    var currentCulture = System.Globalization.CultureInfo.CurrentCulture.Name;
+    var searchPage = Umbraco.ContentAtRoot()
+        .Where(x => x.IsPublished() && x.HasCulture(currentCulture))
+        .DescendantsOrSelfOfType(Search.ModelTypeAlias)
+        .FirstOrDefault();
+
+}
+
+<section class="hero-banner">
+    <!-- background image -->
+    <div class="hero-banner-img">
+        <img src="@homePage?.MainImage?.Url()" alt="banner background">
+    </div>
+    <div class="hero-banner-content">
+        <div class="container">
+            <div class="hero-banner-content-inner">
+                <h1>@Umbraco.GetDictionaryValue("br-Simplifying Your Access to Government Information")</h1>
+                <p>@Umbraco.GetDictionaryValue("br-Search to quickly find any service")</p>
+                <!-- Search box -->
+                <div class="search-box">
+                    <form method="get" action="@(searchPage != null ? searchPage.Url() : "/")">
+                        <input type="text" placeholder='@Umbraco.GetDictionaryValue("Search.Placeholder")' name="q"
+                               value="@searchQuery">
+                        <!-- Add culture parameter to maintain language context -->
+                        <input type="hidden" name="culture" value="@currentCulture">
+                        <button type="submit">@Umbraco.GetDictionaryValue("Search.SearchButton")</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,80 @@
+﻿@using Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<PaymentPage>
+@using ContentModels = Models;
+@{
+    Layout = "master.cshtml";
+    var paymentPage = Umbraco.ContentAtRoot()
+          .DescendantsOrSelfOfType("paymentSuccessPage")
+          .FirstOrDefault();
+    var paymentSuccessPageUrl = paymentPage != null ? paymentPage.Url() : string.Empty;
+}
+
+<section class="payment">
+    <div class="container">
+        <div class="payment__box">
+            <div class="payment__form-head">
+                <h1 class="font-24">Payment</h1>
+            </div>
+            <form action="@paymentSuccessPageUrl" method="post">
+                <div class="single-col-form">
+                    <div class="label-group-head">
+                        <p>Pay with</p>
+                    </div>
+                    <div class="login-box-input custom-radio">
+                        <ul>
+                            <li>
+                                <input type="radio" id="Card" name="radio-group" checked>
+                                <label for="Card">Card</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="Bank" name="radio-group">
+                                <label for="Bank">Bank</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="Transfer" name="radio-group">
+                                <label for="Transfer">Transfer</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="single-col-form">
+                    <div class="login-box-input">
+                        <label for="username">Card Number</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                </div>
+                <div class="two-col-form">
+                    <div class="login-box-input">
+                        <label for="username">Expiration Date</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                    <div class="login-box-input">
+                        <label for="username">CVV</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                </div>
+                <div class="single-col-form">
+                    <div class="login-box-input custom-checkbox">
+                        <input type="checkbox" id="save">
+                        <label for="save">Save card details</label>
+                    </div>
+                </div>
+                <div class="single-col-form">
+                    <button type="submit" class="btn btn--bg--blue btn--payment w-full text-center">Pay B$ 59.28</button>
+                </div>
+                <div class="single-col-form">
+                    <div class="consent">
+                        <p>
+                            Your personal data will be used to process your order, support your experience
+                            throughout this website, and for other purposes described in our privacy
+                            policy.
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("common/footer", Model)

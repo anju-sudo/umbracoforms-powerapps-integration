@@ -1,0 +1,76 @@
+﻿@using Models
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Services>
+@using ContentModels = Models;
+@{
+    Layout = "master.cshtml";
+}
+<section class="gov-services">
+    <div class="container">
+        <div class="go-services__wrapper">
+            <div class="gov-services__header">
+                <h1>@Model?.Title</h1>
+            </div>
+            <div class="gov-services__nav">
+                <a href="#">All Categories</a> | <a href="#">Browse by Agency</a> |
+                <div class="gov-services__nav-select">
+                    <select>
+                        <option>Browse by Category</option>
+                    </select>
+                </div>
+            </div>
+            <div class="gov-services__content">
+                <h2>@Model?.Title</h2>
+                <hr />
+                <div class="gov-services__list">
+                    <ul>
+                        <li>
+                            <a href="#">Application for permission to publish Magazines and Newspapers</a>
+                        </li>
+                        <li>
+                            <a href="#">Apply, update, renew business licenses (OneBiz)</a>
+                        </li>
+                        <li>
+                            <a href="#">Estimated Chargeable Income Form</a>
+                        </li>
+                        <li>
+                            <a href="#">Register as a commercial importer of animal, animal products and animal feed</a>
+                        </li>
+                        <li>
+                            <a href="#">Registration of Companies</a>
+                        </li>
+                        <li>
+                            <a href="#">Tax Administration and Revenue Services (STARS) System</a>
+                        </li>
+                        <li>
+                            <a href="#">Traders and Agent Registration Form</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">Application for permission to use Logo or Emblem</a>
+                        </li>
+                        <li>
+                            <a href="#">Brunei Darussalam National Single Window</a>
+                        </li>
+                        <li>
+                            <a href="#">Licensing Tourist Guide</a>
+                        </li>
+                        <li>
+                            <a href="#">Register as a commercial importer of plants and plant products</a>
+                        </li>
+                        <li>
+                            <a href="#">Registration of Tourist Accommodation Premises</a>
+                        </li>
+                        <li>
+                            <a href="#">Trader Authorisation Form</a>
+                        </li>
+                        <li>
+                            <a href="#">Withholding Tax Form</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

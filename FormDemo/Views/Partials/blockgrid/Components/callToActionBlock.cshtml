@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockGridItem<CallToActionBlock>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Models
+@using Umbraco.Cms.Core.Models.Blocks
+@{
+    var link = Model.Content.Link;
+    if (link is null)
+    {
+        return;
+    }
+}
+
+<a class="call-to-action" href="@link.Url" target="@link.Target">@link.Name</a>
